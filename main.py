@@ -86,7 +86,6 @@ SLEEPING = False
 difficulty = ((0, 50), (3000, 60), (6000, 70), (9000, 80), (10000, "orange"), (12000, 90), (15000, 100), (16000, "red"),
               (18000, 110), (21000, 120), (24000, 130))
 GAME_PAUSED = False
-# GAME_FPS = 60  # SETS GAME FPS
 NUM_ASTROS = 5
 ASTRO_CHOSEN = 0
 DT = 0.1  # higher = Faster FPS, but lesser accuracy
@@ -162,8 +161,6 @@ try:
     astro_red = load_file('astro_sprite_red.png')
     astro_pink = load_file('astro_sprite_pink.png')
     # BACKGROUND
-#     bg_green = load_file('bg_green.png', 'bg', resize=True)
-#     bg_blue = load_file('bg_blue.png', 'bg', resize=True)
     pause_screen_bg = load_file('pause_screen_bg.png')
     dead_screen_bg = load_file('dead_screen_bg.png')
     pause_screen_bg = pygame.transform.scale(pause_screen_bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
@@ -174,11 +171,7 @@ try:
     panel_orange = load_file('panel_orange.png', resize=True)
     PANEL_WIDTH = panel_green.get_width()
     PANEL_HEIGHT = panel_green.get_height()
-    # FONTS
-    # magneto_bold = load_file('MAGNETOB.ttf', False)
-    # courbd = load_file('courbd.ttf', False)
     magneto_bold = courbd = gills = trajan = load_file('TrajanPro-Regular.otf', False)
-    # gills = load_file('gills.ttf', False)
     # SOUND
     bounce_fx = pygame.mixer.Sound(load_file('bounce.wav', False))
     dead_fx = pygame.mixer.Sound(load_file('dead_fx.wav', False))
@@ -246,10 +239,6 @@ class Astro(pygame.sprite.Sprite):
         astro_sprites[2][num] = pygame.transform.scale(astro_black.subsurface(img_width * num, 0, img_width, img_height), (width, height))
         astro_sprites[3][num] = pygame.transform.scale(astro_red.subsurface(img_width * num, 0, img_width, img_height), (width, height))
         astro_sprites[4][num] = pygame.transform.scale(astro_pink.subsurface(img_width * num, 0, img_width, img_height), (width, height))
-        
-    # astro[] = blue,green,black,red,pink
-    # astro[][] = down,up,down_left,up_left,down_right,up_right
-
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -329,11 +318,6 @@ class Astro(pygame.sprite.Sprite):
                     if sprite.x - self.empty_x < self.x + self.width / 2 < sprite.x + sprite.width + self.empty_x:  
                         collided = True
                 return collided
-            
-#     def jump_inc(self):
-#         self.grav = -0.2 * SCALING_Y
-#     def reset_abilities(self):
-#         self.grav = -0.4 * SCALING_Y
 
     def render(self):
         gameDisplay.blit(self.image, (self.x, self.y))  # self.x, self.y = UPPER-LEFT CORNER
@@ -357,20 +341,6 @@ class Astro(pygame.sprite.Sprite):
         self.prev_vel = state[3]
         self.isDescending = state[4]
         self.change_sprite(state[5])
-
-# def power_up(ability):
-#     if ability == 'jump':
-#         print("Jump Increased!")
-#         global jump_inc, has_power_up, power_timer
-#         jump_inc = True
-#         has_power_up = True
-#         power_timer = pygame.time.get_ticks()
-#     elif ability == None:
-#         print('Power Up Finished')
-#         power_timer = 0
-#         has_power_up = False
-#         jump_inc = False
-
 
 # PANELS
 class Panel(pygame.sprite.Sprite):
@@ -872,7 +842,6 @@ class HighScore():
     
     def render(self, score):
         if self.on_screen:
-            # message_display('High Score', 50 * SCALING_X , int(DISPLAY_WIDTH / 2), self.y - 30 * SCALING_Y, magneto_bold, bright_yellow, True)
             pygame.draw.rect(gameDisplay, bright_yellow, (0, self.y, DISPLAY_WIDTH, 2 * SCALING_Y))
 
 
@@ -950,8 +919,6 @@ def game_loop():
                     global GAME_PAUSED
                     GAME_PAUSED = True
                     pause(score)
-#                 elif event.key == pygame.K_1:
-#                     power_up('jump')
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     player.setDir(0)
@@ -1071,16 +1038,7 @@ def game_loop():
                 if track_no < len(soundtrack):  # prevents error
                     track = soundtrack[track_no]
                     if current_track != track:
-                        play_soundtrack(track, True)
-            
-            
-    #         # POWER UP
-    #         if has_power_up:
-    #             player.jump_inc()
-    #             global power_timer
-    #             if (pygame.time.get_ticks() - power_timer) > 5000:
-    #                 player.reset_abilities()
-    #                 power_up(None)                       
+                        play_soundtrack(track, True)                  
                     
             if highscore.on_screen:highscore.render(score)
 
@@ -1096,8 +1054,6 @@ def game_loop():
                     pygame.draw.rect(gameDisplay, black, (DISPLAY_WIDTH, 0, PADDING_X, DISPLAY_HEIGHT))   
                 if PADDING_Y != 0:
                     pygame.draw.rect(gameDisplay, black, (0, DISPLAY_HEIGHT, DISPLAY_WIDTH, PADDING_Y))
-            
-#             print gameClock.get_fps()
             pygame.display.update()
 
 # INITIALIZE PROGRAM
