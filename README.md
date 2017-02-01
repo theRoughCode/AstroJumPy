@@ -4,6 +4,12 @@ Side project I worked on while waiting for University to start.  I began this si
 
 All artwork featured in this game were all made by me for this game.  
 
+## How to Install the APK
+1. Download the .apk file [here](https://github.com/theRoughCode/AstroJumPy/blob/master/AstroJump-1.0-release.apk).
+2. Allow Installation from Unknown Sources `(Settings -> Security -> "Unknown Sources")`.
+3. Install the .apk
+4. Enjoy the game!
+
 ## In-Game Screenshots
 ![](https://github.com/theRoughCode/AstroJumPy/blob/master/screenshots/Screenshot_20170131-231739.png "Main Menu")
 ![](https://github.com/theRoughCode/AstroJumPy/blob/master/screenshots/Screenshot_20170131-231804.png "Character Select")
